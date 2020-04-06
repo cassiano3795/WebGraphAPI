@@ -22,4 +22,3 @@ jobs:
     - name: Build
       run: dotnet build WebGraphAPI/WebGraphAPI.sln --configuration Release
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
