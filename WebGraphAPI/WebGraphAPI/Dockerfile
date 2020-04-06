@@ -15,13 +15,13 @@ COPY ["Core/Core.csproj", "Core/"]
 COPY ["Repositories/Repositories.csproj", "Repositories/"]
 RUN dotnet restore "WebGraphAPI/WebGraphAPI.csproj"
 COPY . .
-WORKDIR "/src/ZeengGraphAPI"
-RUN dotnet build "ZeengGraphAPI.csproj" -c Release -o /app/build
+WORKDIR "/src/WebGraphAPI"
+RUN dotnet build "WebGraphAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ZeengGraphAPI.csproj" -c Release -o /app/publish
+RUN dotnet publish "WebGraphAPI.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ZeengGraphAPI.dll"]
+ENTRYPOINT ["dotnet", "WebGraphAPI.dll"]
