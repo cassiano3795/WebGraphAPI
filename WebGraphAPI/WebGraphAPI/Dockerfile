@@ -5,15 +5,15 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-bionic AS build
 WORKDIR /src
-COPY ["ZeengGraphAPI/ZeengGraphAPI.csproj", "ZeengGraphAPI/"]
-COPY ["ZServiceCollections/ZServiceCollections.csproj", "ZServiceCollections/"]
-COPY ["ZJwtSecurity/ZJwtSecurity.csproj", "ZJwtSecurity/"]
-COPY ["ZGraphQL/ZGraphQL.csproj", "ZGraphQL/"]
-COPY ["ZBD/ZBD.csproj", "ZBD/"]
-COPY ["ZServices/ZServices.csproj", "ZServices/"]
-COPY ["ZCore/ZCore.csproj", "ZCore/"]
-COPY ["ZRepositories/ZRepositories.csproj", "ZRepositories/"]
-RUN dotnet restore "ZeengGraphAPI/ZeengGraphAPI.csproj"
+COPY ["WebGraphAPI/WebGraphAPI.csproj", "WebGraphAPI/"]
+COPY ["ServiceCollections/ServiceCollections.csproj", "ServiceCollections/"]
+COPY ["JwtSecurity/JwtSecurity.csproj", "JwtSecurity/"]
+COPY ["CoreGraphQL/CoreGraphQL.csproj", "CoreGraphQL/"]
+COPY ["BD/BD.csproj", "BD/"]
+COPY ["Services/Services.csproj", "Services/"]
+COPY ["Core/Core.csproj", "Core/"]
+COPY ["Repositories/Repositories.csproj", "Repositories/"]
+RUN dotnet restore "WebGraphAPI/WebGraphAPI.csproj"
 COPY . .
 WORKDIR "/src/ZeengGraphAPI"
 RUN dotnet build "ZeengGraphAPI.csproj" -c Release -o /app/build
