@@ -20,6 +20,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore WebGraphAPI/WebGraphAPI.sln
     - name: Build
-      run: dotnet build WebGraphAPI/WebGraphAPI.sln --configuration Release --no-restore
+      run: dotnet build WebGraphAPI/WebGraphAPI.sln --configuration Release
     - name: Test
       run: dotnet test --no-restore --verbosity normal
