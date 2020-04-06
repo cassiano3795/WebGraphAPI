@@ -1,4 +1,6 @@
-﻿namespace WebGraphAPI.Models
+﻿using Newtonsoft.Json;
+
+namespace WebGraphAPI.Models
 
 {
     public class UserModel

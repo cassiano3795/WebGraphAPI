@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using GraphQL;
+using GraphQL.Types;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebGraphAPI.Utils;

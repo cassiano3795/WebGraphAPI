@@ -1,4 +1,6 @@
-﻿namespace WebGraphAPI.Utils
+﻿using Newtonsoft.Json.Linq;
+
+namespace WebGraphAPI.Utils
 {
     public class GraphQLQuery
     {

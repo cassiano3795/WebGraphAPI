@@ -2,6 +2,7 @@
 using CoreGraphQL.Resolvers;
 using CoreGraphQL.Types.User;
 using GraphQL;
+using GraphQL.Types;
 
 namespace CoreGraphQL.Queries
 {

@@ -1,12 +1,22 @@
-﻿using BD.Contexts;
+﻿using System;
+using System.IO;
+using System.Linq;
+using BD.Contexts;
 using Core.Repositories;
 using Core.Services;
-using CoreGraphQL.Queries;
 using CoreGraphQL.Resolvers;
 using CoreGraphQL.Types.Client;
 using CoreGraphQL.Types.User;
-using GraphQL.Resolvers;
+using GraphQL;
+using GraphQL.Types;
 using JwtSecurity.Classes;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Repositories.Repositories;
 using Services.Services;
 
@@ -94,7 +104,7 @@ namespace ServiceCollections
             services.AddScoped<UserResolvers>();
         }
 
-        public static void AddGraphQlService(this IServiceCollection services, IHostingEnvironment hostingEnvironment)
+        public static void AddGraphQlService(this IServiceCollection services, IWebHostEnvironment hostingEnvironment)
         {
             // ARQUIVOS DO GRAPHQL
             var rootPath = hostingEnvironment.WebRootPath;
@@ -107,7 +117,7 @@ namespace ServiceCollections
             services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
 
             // ADD DO SERVICE
-            services.AddScoped<Query>();
+            services.AddScoped<DbLoggerCategory.Query>();
 
             // ADD DOS TYPES
             services.AddScoped<UserType>();
@@ -121,7 +131,7 @@ namespace ServiceCollections
                 {
                     builder.Types.Include<UserType>();
                     builder.Types.Include<ClientType>();
-                    builder.Types.Include<Query>();
+                    builder.Types.Include<DbLoggerCategory.Query>();
                     builder.DependencyResolver = new FuncDependencyResolver(provider.GetRequiredService);
                 });
             });
