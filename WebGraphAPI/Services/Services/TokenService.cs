@@ -5,7 +5,6 @@ using System.Security.Principal;
 using BD.Models;
 using Core.Services;
 using JwtSecurity.Classes;
-using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Services.Services
@@ -14,10 +13,10 @@ namespace Services.Services
     {
         private readonly TokenConfigurations _tokenConfiguraions;
         private readonly SigningConfigurations _signingConfigurations;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly Microsoft.AspNetCore.Http.IHttpContextAccessor _httpContextAccessor;
 
         public TokenService(TokenConfigurations tokenConfigurations, SigningConfigurations signingConfigurations,
-            IHttpContextAccessor httpContextAccessor)
+            Microsoft.AspNetCore.Http.IHttpContextAccessor httpContextAccessor)
         {
             _tokenConfiguraions = tokenConfigurations;
             _signingConfigurations = signingConfigurations;
