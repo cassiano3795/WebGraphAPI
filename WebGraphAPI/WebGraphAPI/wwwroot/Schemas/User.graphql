@@ -1,0 +1,16 @@
+type User {
+  id: ID
+  nome: String
+  email: String
+  client: Client
+}
+
+type UserList{
+  users: [User]
+  count: Int
+}
+
+type Query {
+  user(id: ID!): User
+  users(id: ID, size: Int = 10, offSet: Int = 0): UserList
+}
