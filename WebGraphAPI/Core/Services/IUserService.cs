@@ -4,5 +4,6 @@ namespace Core.Services
 {
     public interface IUserService : IBaseService<Usuarios>
     {
+        void InicializaDb();
     }
 }

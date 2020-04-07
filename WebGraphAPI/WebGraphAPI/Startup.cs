@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Core.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -50,8 +51,12 @@ namespace WebGraphAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IUserService userService, IClientService clientService)
         {
+            // INICIALIZA O DB INMEMORY
+            clientService.InicializaDb();
+            userService.InicializaDb();
+
             // TODO: CRIAR AMBIENTES DE ENV
             {
                 if (env.IsDevelopment() || env.IsStaging())

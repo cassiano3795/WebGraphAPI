@@ -25,9 +25,14 @@ namespace Repositories.Repositories
             _context.Set<T>().Remove(entity);
         }
 
-        public void Dispose()
+        public void Save()
         {
-            this.Dispose();
+            _context.SaveChanges();
+        }
+
+        public Task SaveAsync()
+        {
+            return _context.SaveChangesAsync();
         }
 
         public IQueryable<T> FindAll()
@@ -45,14 +50,14 @@ namespace Repositories.Repositories
             return _context.Set<T>().Where(expression);
         }
 
-        public async Task SaveAsync()
-        {
-            await _context.SaveChangesAsync();
-        }
-
         public void Update(T entity)
         {
             _context.Set<T>().Update(entity);
+        }
+
+        public void Dispose()
+        {
+            _context?.Dispose();
         }
     }
 }

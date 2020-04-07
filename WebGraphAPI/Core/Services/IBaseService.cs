@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Core.Services
 {
@@ -12,5 +13,7 @@ namespace Core.Services
         void Insert(T entity);
         void Update(T entity);
         void Delete(T entity);
+        void Save();
+        Task SaveAsync();
     }
 }

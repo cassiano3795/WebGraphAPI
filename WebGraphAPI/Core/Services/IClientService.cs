@@ -4,5 +4,6 @@ namespace Core.Services
 {
     public interface IClientService : IBaseService<Clientes>
     {
+        void InicializaDb();
     }
 }

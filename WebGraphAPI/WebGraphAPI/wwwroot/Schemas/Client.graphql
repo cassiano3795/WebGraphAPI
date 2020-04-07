@@ -1,7 +1,6 @@
 type Client {
   id: ID
   nome: String
-  qtdEmpresas: Int
   site: String
   users(id: ID, size: Int = 10, offSet: Int = 0): UserList
 }

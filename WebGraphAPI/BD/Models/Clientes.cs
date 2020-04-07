@@ -1,7 +1,10 @@
-﻿namespace BD.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BD.Models
 {
     public partial class Clientes
     {
+        [Key]
         public int IdCliente { get; set; }
         public string Nome { get; set; }
         public string Site { get; set; }

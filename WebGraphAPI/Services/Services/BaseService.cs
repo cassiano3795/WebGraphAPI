@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Core.Repositories;
 using Core.Services;
 
@@ -18,6 +19,16 @@ namespace Services.Services
         public void Delete(T entity)
         {
             _baseRepository.Delete(entity);
+        }
+
+        public void Save()
+        {
+            _baseRepository.Save();
+        }
+
+        public Task SaveAsync()
+        {
+            return _baseRepository.SaveAsync();
         }
 
         public IEnumerable<T> FindAll()

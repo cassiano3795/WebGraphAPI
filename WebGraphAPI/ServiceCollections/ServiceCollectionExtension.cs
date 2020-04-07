@@ -4,6 +4,7 @@ using System.Linq;
 using BD.Contexts;
 using Core.Repositories;
 using Core.Services;
+using CoreGraphQL.Queries;
 using CoreGraphQL.Resolvers;
 using CoreGraphQL.Types.Client;
 using CoreGraphQL.Types.User;
@@ -30,7 +31,8 @@ namespace ServiceCollections
             {
                 options
                     //.UseLazyLoadingProxies()
-                    .UseMySql(configuration.GetConnectionString("Entities"));
+                    .UseInMemoryDatabase("baseTeste");
+                    //.UseMySql(configuration.GetConnectionString("Entities"));
             });
         }
 
@@ -117,7 +119,7 @@ namespace ServiceCollections
             services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
 
             // ADD DO SERVICE
-            services.AddScoped<DbLoggerCategory.Query>();
+            services.AddScoped<Query>();
 
             // ADD DOS TYPES
             services.AddScoped<UserType>();
@@ -131,7 +133,7 @@ namespace ServiceCollections
                 {
                     builder.Types.Include<UserType>();
                     builder.Types.Include<ClientType>();
-                    builder.Types.Include<DbLoggerCategory.Query>();
+                    builder.Types.Include<Query>();
                     builder.DependencyResolver = new FuncDependencyResolver(provider.GetRequiredService);
                 });
             });
