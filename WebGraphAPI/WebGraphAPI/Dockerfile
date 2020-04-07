@@ -4,7 +4,7 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
-WORKDIR /src
+WORKDIR /
 COPY ["WebGraphAPI/WebGraphAPI.csproj", "WebGraphAPI/"]
 COPY ["ServiceCollections/ServiceCollections.csproj", "ServiceCollections/"]
 COPY ["JwtSecurity/JwtSecurity.csproj", "JwtSecurity/"]
