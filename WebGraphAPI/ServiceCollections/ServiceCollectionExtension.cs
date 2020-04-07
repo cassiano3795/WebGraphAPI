@@ -109,7 +109,7 @@ namespace ServiceCollections
             // ARQUIVOS DO GRAPHQL
             var rootPath = hostingEnvironment.WebRootPath;
 
-            var schemasDirectory = Path.Combine(rootPath, "schemas");
+            var schemasDirectory = Path.Combine(rootPath, "Schemas");
 
             var graphqlFiles = Directory.EnumerateFiles(schemasDirectory).Select(File.ReadAllText).ToArray();
 
