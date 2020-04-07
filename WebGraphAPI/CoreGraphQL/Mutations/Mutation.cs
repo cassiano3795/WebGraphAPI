@@ -45,7 +45,7 @@ namespace CoreGraphQL.Mutations
             return user;
         }
 
-        //USER
+        // USER
         [GraphQLMetadata("createUser")]
         public Usuarios CreateUser(ResolveFieldContext context)
         {

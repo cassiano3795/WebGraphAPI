@@ -17,6 +17,7 @@ namespace CoreGraphQL.Queries
             _clientResolvers = clientResolvers;
         }
 
+        // USER
         [GraphQLMetadata("user")]
         public Usuarios GetUser(ResolveFieldContext context, int id)
         {
@@ -38,6 +39,7 @@ namespace CoreGraphQL.Queries
             return userListType;
         }
 
+        // CLIENT
         [GraphQLMetadata("client")]
         public Clientes GetClient(ResolveFieldContext context)
         {
