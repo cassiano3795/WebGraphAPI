@@ -41,7 +41,7 @@ namespace Services.Services
             return _baseRepository.FindById(id);
         }
 
-        public void Insert(T entity)
+        public void Create(T entity)
         {
             _baseRepository.Create(entity);
         }

@@ -5,6 +5,18 @@ type Client {
   users(id: ID, size: Int = 10, offSet: Int = 0): UserList
 }
 
+input ClientInput{
+  nome: String
+  site: String
+  users: [Int]
+}
+
 type Query {
   client: Client
+}
+
+type Mutation {
+  createClient(client: ClientInput): Client
+  updateClient(client: ClientInput): Client
+  deleteClient(id: Int!): Boolean
 }

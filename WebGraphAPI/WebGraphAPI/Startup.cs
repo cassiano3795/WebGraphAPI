@@ -25,8 +25,6 @@ namespace WebGraphAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddSingleton<IConfiguration>(Configuration);
-
             services.AddRepositories();
             services.AddServices();
             services.AddDbContext(_configuration);
@@ -45,8 +43,9 @@ namespace WebGraphAPI
                 });
             });
 
-            services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Latest);
-
+            services
+                .AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Latest)
+                .AddNewtonsoftJson();
             services.AddGraphQlService(_hostingEnvironment);
         }
 
@@ -65,7 +64,6 @@ namespace WebGraphAPI
                 }
                 else
                 {
-                    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                     app.UseHsts();
                 }
             }

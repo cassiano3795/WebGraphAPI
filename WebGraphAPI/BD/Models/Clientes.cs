@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BD.Models
 {
@@ -14,5 +15,6 @@ namespace BD.Models
         public string Celular { get; set; }
         public string Cnpj { get; set; }
         public string Email { get; set; }
+        public ICollection<Usuarios> Usuarios { get; set; }
     }
 }

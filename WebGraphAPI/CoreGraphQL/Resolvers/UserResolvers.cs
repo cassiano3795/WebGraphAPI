@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BD.Models;
 using Core.Services;
@@ -27,6 +28,39 @@ namespace CoreGraphQL.Resolvers
             var users = _userService.Where(x => x.Idcliente == IdClient && (id == null || x.Idusuario == id));
             count = users.Count();
             return users.Skip(offSet).Take(size).ToList();
+        }
+
+        public Usuarios CreateUser(ResolveFieldContext context)
+        {
+            var userInput = context.GetArgument<Usuarios>("user");
+            _userService.Create(userInput);
+            _userService.Save();
+            return userInput;
+        }
+
+        public Usuarios UpdateUser(ResolveFieldContext context)
+        {
+            var userInput = context.GetArgument<Usuarios>("user");
+            _userService.Update(userInput);
+            _userService.Save();
+            return userInput;
+        }
+
+        public bool DeleteUser(ResolveFieldContext context)
+        {
+            try
+            {
+                var id = context.GetArgument<int>("id");
+                var user = _userService.FindById(id);
+                _userService.Delete(user);
+                _userService.Save();
+                return true;
+            }
+            catch (Exception e)
+            {
+                //TODO: CREATE A METHOD CATCHEXCPETION AND SAVE "e"
+                return false;
+            }
         }
     }
 }

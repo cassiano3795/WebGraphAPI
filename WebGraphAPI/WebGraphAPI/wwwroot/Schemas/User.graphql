@@ -5,6 +5,12 @@ type User {
   client: Client
 }
 
+input UserInput{
+  nome: String
+  email: String
+  idCliente: Int!
+}
+
 type UserList{
   users: [User]
   count: Int
@@ -13,4 +19,10 @@ type UserList{
 type Query {
   user(id: ID!): User
   users(id: ID, size: Int = 10, offSet: Int = 0): UserList
+}
+
+type Mutation {
+  createUser(user: UserInput): User
+  updateUser(user: UserInput): User
+  deleteUser(id: Int!): Boolean
 }

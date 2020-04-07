@@ -4,6 +4,7 @@ using System.Linq;
 using BD.Contexts;
 using Core.Repositories;
 using Core.Services;
+using CoreGraphQL.Mutations;
 using CoreGraphQL.Queries;
 using CoreGraphQL.Resolvers;
 using CoreGraphQL.Types.Client;
@@ -110,9 +111,7 @@ namespace ServiceCollections
         {
             // ARQUIVOS DO GRAPHQL
             var rootPath = hostingEnvironment.WebRootPath;
-
             var schemasDirectory = Path.Combine(rootPath, "Schemas");
-
             var graphqlFiles = Directory.EnumerateFiles(schemasDirectory).Select(File.ReadAllText).ToArray();
 
             // ADD DO EXECUTER
@@ -120,6 +119,7 @@ namespace ServiceCollections
 
             // ADD DO SERVICE
             services.AddScoped<Query>();
+            services.AddScoped<Mutation>();
 
             // ADD DOS TYPES
             services.AddScoped<UserType>();
@@ -134,6 +134,7 @@ namespace ServiceCollections
                     builder.Types.Include<UserType>();
                     builder.Types.Include<ClientType>();
                     builder.Types.Include<Query>();
+                    builder.Types.Include<Mutation>();
                     builder.DependencyResolver = new FuncDependencyResolver(provider.GetRequiredService);
                 });
             });
