@@ -5,15 +5,15 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /
-COPY ["WebGraphAPI/WebGraphAPI.csproj", "WebGraphAPI/"]
-COPY ["ServiceCollections/ServiceCollections.csproj", "ServiceCollections/"]
-COPY ["JwtSecurity/JwtSecurity.csproj", "JwtSecurity/"]
-COPY ["CoreGraphQL/CoreGraphQL.csproj", "CoreGraphQL/"]
-COPY ["BD/BD.csproj", "BD/"]
-COPY ["Services/Services.csproj", "Services/"]
-COPY ["Core/Core.csproj", "Core/"]
-COPY ["Repositories/Repositories.csproj", "Repositories/"]
-COPY ["WebGraphAPI/wwwroot/Schemas", "wwwroot/schemas"]
+COPY ["WebGraphAPI/WebGraphAPI/WebGraphAPI.csproj", "WebGraphAPI/"]
+COPY ["WebGraphAPI/ServiceCollections/ServiceCollections.csproj", "ServiceCollections/"]
+COPY ["WebGraphAPI/JwtSecurity/JwtSecurity.csproj", "JwtSecurity/"]
+COPY ["WebGraphAPI/CoreGraphQL/CoreGraphQL.csproj", "CoreGraphQL/"]
+COPY ["WebGraphAPI/BD/BD.csproj", "BD/"]
+COPY ["WebGraphAPI/Services/Services.csproj", "Services/"]
+COPY ["WebGraphAPI/Core/Core.csproj", "Core/"]
+COPY ["WebGraphAPI/Repositories/Repositories.csproj", "Repositories/"]
+COPY ["WebGraphAPI/WebGraphAPI/wwwroot/Schemas", "wwwroot/schemas"]
 RUN dotnet restore "WebGraphAPI/WebGraphAPI.csproj"
 COPY . .
 WORKDIR "/src/WebGraphAPI"
