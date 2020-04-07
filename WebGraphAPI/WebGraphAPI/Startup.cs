@@ -1,7 +1,10 @@
-﻿using Core.Services;
+﻿using System;
+using Core.Services;
+using GraphiQl;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebSockets;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -44,8 +47,16 @@ namespace WebGraphAPI
             });
 
             services
-                .AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Latest)
+                .AddMvc(options => options.EnableEndpointRouting = false)
+                .SetCompatibilityVersion(CompatibilityVersion.Latest)
                 .AddNewtonsoftJson();
+
+            services.AddWebSockets(options =>
+            {
+                options.KeepAliveInterval = TimeSpan.FromSeconds(120);
+                options.ReceiveBufferSize = 4 * 1024;
+            });
+
             services.AddGraphQlService(_hostingEnvironment);
         }
 
@@ -71,6 +82,8 @@ namespace WebGraphAPI
             app.UseCors(x =>  x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseStaticFiles();
+
+            app.UseWebSockets();
 
             app.UseHttpsRedirection();
 

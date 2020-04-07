@@ -4,12 +4,14 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BD.Contexts;
 using Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repositories.Repositories
 {
     public class BaseRepository<T> : IDisposable, IBaseRepository<T> where T : class
     {
         private readonly Entities _context;
+        protected DbSet<T> Set => _context.Set<T>();
 
         public BaseRepository(Entities context)
         {
@@ -17,12 +19,12 @@ namespace Repositories.Repositories
         }
         public void Create(T entity)
         {
-            _context.Set<T>().Add(entity);
+            Set.Add(entity);
         }
 
         public void Delete(T entity)
         {
-            _context.Set<T>().Remove(entity);
+            Set.Remove(entity);
         }
 
         public void Save()
@@ -37,22 +39,22 @@ namespace Repositories.Repositories
 
         public IQueryable<T> FindAll()
         {
-            return _context.Set<T>();
+            return Set;
         }
 
         public T FindById(int id)
         {
-            return _context.Set<T>().Find(id);
+            return Set.Find(id);
         }
 
         public IQueryable<T> Where(Expression<Func<T, bool>> expression)
         {
-            return _context.Set<T>().Where(expression);
+            return Set.Where(expression);
         }
 
         public void Update(T entity)
         {
-            _context.Set<T>().Update(entity);
+            Set.Update(entity);
         }
 
         public void Dispose()
