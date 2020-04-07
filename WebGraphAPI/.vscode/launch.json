@@ -9,9 +9,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/ZeengGraphAPI/bin/Debug/netcoreapp3.0/ZeengGraphAPI.dll",
+            "program": "${workspaceFolder}/WebGraphAPI/bin/Debug/netcoreapp3.1/WebGraphAPI.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/ZeengGraphAPI",
+            "cwd": "${workspaceFolder}/WebGraphAPI",
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",
