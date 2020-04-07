@@ -16,11 +16,11 @@ COPY ["WebGraphAPI/Repositories/Repositories.csproj", "Repositories/"]
 COPY ["WebGraphAPI/WebGraphAPI/wwwroot/Schemas", "wwwroot/schemas"]
 RUN dotnet restore "WebGraphAPI/WebGraphAPI.csproj"
 COPY . .
-WORKDIR "/src/WebGraphAPI"
-RUN dotnet build "WebGraphAPI.csproj" -c Release -o /app/build
+WORKDIR "/WebGraphAPI"
+RUN dotnet build "WebGraphAPI/WebGraphAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "WebGraphAPI.csproj" -c Release -o /app/publish
+RUN dotnet publish "WebGraphAPI/WebGraphAPI.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
