@@ -28,6 +28,7 @@ namespace WebGraphAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddUnityOfWork();
             services.AddRepositories();
             services.AddServices();
             services.AddDbContext(_configuration);

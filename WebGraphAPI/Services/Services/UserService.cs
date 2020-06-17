@@ -6,14 +6,14 @@ namespace Services.Services
 {
     public class UserService : BaseService<Usuarios>, IUserService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUnityOfWork<Usuarios> _unityOfWork;
         private readonly ICriptService _criptService;
 
-        public UserService(IUserRepository userRepository, ICriptService criptService)
-            :base(userRepository)
+        public UserService(ICriptService criptService, IUnityOfWork<Usuarios> unityOfWork)
+            :base(unityOfWork)
         {
-            _userRepository = userRepository;
             _criptService = criptService;
+            _unityOfWork = unityOfWork;
         }
 
         public void InicializaDb()
@@ -43,9 +43,9 @@ namespace Services.Services
                 Senha = senha
             };
 
-            _userRepository.Create(user);
-            _userRepository.Create(user2);
-            _userRepository.Save();
+            _unityOfWork.UserRepository.Create(user);
+            _unityOfWork.UserRepository.Create(user2);
+            _unityOfWork.Commit();
         }
     }
 }

@@ -19,6 +19,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Repositories;
 using Repositories.Repositories;
 using Services.Services;
 
@@ -35,6 +36,11 @@ namespace ServiceCollections
                     .UseInMemoryDatabase("baseTeste");
                     //.UseMySql(configuration.GetConnectionString("Entities"));
             });
+        }
+
+        public static void AddUnityOfWork(this IServiceCollection services)
+        {
+            services.AddScoped(typeof(IUnityOfWork<>), typeof(UnityOfWork<>));
         }
 
         public static void AddRepositories(this IServiceCollection services)

@@ -6,12 +6,12 @@ namespace Services.Services
 {
     public class ClientService : BaseService<Clientes>, IClientService
     {
-        private readonly IClientRepository _clientRepository;
+        private readonly IUnityOfWork<Clientes> _unityOfWork;
 
-        public ClientService(IClientRepository clientRepository)
-            :base(clientRepository)
+        public ClientService(IUnityOfWork<Clientes> unityOfWork)
+            :base(unityOfWork)
         {
-            _clientRepository = clientRepository;
+            _unityOfWork = unityOfWork;
         }
 
         public void InicializaDb()
@@ -29,8 +29,8 @@ namespace Services.Services
                 Telefone = "(xx) xxxxx-xxxx"
             };
 
-            _clientRepository.Create(client);
-            _clientRepository.Save();
+            _unityOfWork.ClientRepository.Create(client);
+            _unityOfWork.Commit();
         }
     }
 }

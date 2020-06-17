@@ -10,50 +10,52 @@ namespace Services.Services
     public class BaseService<T> : IBaseService<T>
         where T : class
     {
-        private readonly IBaseRepository<T> _baseRepository;
+        private readonly IUnityOfWork<T> _unityOfWork;
 
-        public BaseService(IBaseRepository<T> baseRepository)
+        public BaseService(IUnityOfWork<T> unityOfWork)
         {
-            _baseRepository = baseRepository;
+            _unityOfWork = unityOfWork;
         }
         public void Delete(T entity)
         {
-            _baseRepository.Delete(entity);
+            _unityOfWork.BaseRepository.Delete(entity);
         }
 
         public void Save()
         {
-            _baseRepository.Save();
+            // DEPRECATED
+            _unityOfWork.BaseRepository.Save();
         }
 
         public Task SaveAsync()
         {
-            return _baseRepository.SaveAsync();
+            // DEPRECATED
+            return _unityOfWork.BaseRepository.SaveAsync();
         }
 
         public IEnumerable<T> FindAll()
         {
-            return _baseRepository.FindAll();
+            return _unityOfWork.BaseRepository.FindAll();
         }
 
         public T FindById(int id)
         {
-            return _baseRepository.FindById(id);
+            return _unityOfWork.BaseRepository.FindById(id);
         }
 
         public void Create(T entity)
         {
-            _baseRepository.Create(entity);
+            _unityOfWork.BaseRepository.Create(entity);
         }
 
         public void Update(T entity)
         {
-            _baseRepository.Update(entity);
+            _unityOfWork.BaseRepository.Update(entity);
         }
 
         public IEnumerable<T> Where(Expression<Func<T, bool>> exp)
         {
-            return _baseRepository.Where(exp);
+            return _unityOfWork.BaseRepository.Where(exp);
         }
     }
 }
