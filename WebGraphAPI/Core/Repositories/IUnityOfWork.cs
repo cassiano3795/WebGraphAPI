@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 
 namespace Core.Repositories
 {
@@ -10,6 +8,8 @@ namespace Core.Repositories
         IClientRepository ClientRepository { get; }
         IUserRepository UserRepository { get; }
         void Commit();
-        void Rolback();
+        Task CommitAsync();
+        void Rollback();
+        Task RollbackAsync();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using BD.Models;
 using Core.Services;
 using GraphQL.Types;
@@ -25,16 +26,16 @@ namespace CoreGraphQL.Resolvers
 
         public List<Usuarios> ResolveUsers(ResolveFieldContext context, int? id, int size, int offSet, out int count)
         {
-            var users = _userService.Where(x => x.Idcliente == IdClient && (id == null || x.Idusuario == id));
+            var users = _userService.GetUsersByClient(IdClient, id);
             count = users.Count();
             return users.Skip(offSet).Take(size).ToList();
         }
 
-        public Usuarios CreateUser(ResolveFieldContext context)
+        public async Task<Usuarios> CreateUser(ResolveFieldContext context)
         {
             var userInput = context.GetArgument<Usuarios>("user");
-            _userService.Create(userInput);
-            _userService.Save();
+            await _userService.CreateAsync(userInput);
+            await _userService.SaveAsync();
             return userInput;
         }
 

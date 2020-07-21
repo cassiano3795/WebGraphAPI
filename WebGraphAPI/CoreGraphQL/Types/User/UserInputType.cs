@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using BD.Models;
+﻿using BD.Models;
 using GraphQL;
 
 namespace CoreGraphQL.Types.User

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using BD.Models;
 using Core.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -25,7 +26,7 @@ namespace WebGraphAPI.Controllers
         [AllowAnonymous]
         [Route("login")]
         [HttpPost]
-        public IActionResult Login([FromBody] UserModel user)
+        public async Task<IActionResult> Login([FromBody] UserModel user)
         {
             try
             {
@@ -33,8 +34,9 @@ namespace WebGraphAPI.Controllers
                 Usuarios userBase = null;
                 if (user != null && !string.IsNullOrWhiteSpace(user.User))
                 {
-                    userBase = _userService.Where(x =>
-                        x.Login.Equals(user.User)).FirstOrDefault();
+                    userBase = await _userService.GetUserAsync(user.User);
+                    //userBase = _userService.Where(x =>
+                    //    x.Login.Equals(user.User)).FirstOrDefault();
                     var passwordHash = _criptService.Encrypt(user.Password);
 
                     if (userBase != null)

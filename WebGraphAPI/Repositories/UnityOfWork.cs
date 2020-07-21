@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 using BD.Contexts;
 using Core.Repositories;
 using Repositories.Repositories;
@@ -33,10 +31,24 @@ namespace Repositories
             _context.SaveChanges();
             Disposed = true;
         }
-        public void Rolback()
+
+        public async Task CommitAsync()
+        {
+            if (Disposed) await Task.CompletedTask;
+
+            await _context.SaveChangesAsync();
+            Disposed = true;
+        }
+        public void Rollback()
         {
             Disposed = true;
             _context.Dispose();
+        }
+
+        public async Task RollbackAsync()
+        {
+            Disposed = true;
+            await _context.DisposeAsync();
         }
     }
 }

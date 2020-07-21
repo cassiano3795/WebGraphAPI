@@ -1,6 +1,5 @@
 ﻿using System;
 using Core.Services;
-using GraphiQl;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 using BD.Models;
 using CoreGraphQL.Resolvers;
 using GraphQL;
 using GraphQL.Types;
-using Newtonsoft.Json;
 
 namespace CoreGraphQL.Mutations
 {
@@ -47,10 +44,10 @@ namespace CoreGraphQL.Mutations
 
         // USER
         [GraphQLMetadata("createUser")]
-        public Usuarios CreateUser(ResolveFieldContext context)
+        public async Task<Usuarios> CreateUser(ResolveFieldContext context)
         {
 
-            var user = _userResolvers.CreateUser(context);
+            var user = await _userResolvers.CreateUser(context);
             return user;
         }
 
